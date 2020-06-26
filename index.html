@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="assets/script.js" defer></script>
+    <link rel="icon" href="https://img.icons8.com/plasticine/100/000000/sun-smiling.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+
+
+    <title>Weather Station</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark d-flex justify-content-center mb-2">
+        <span class="navbar-brand h1">Weather Dashboard</span>
+    </nav>
+    <!-- List group -->
+    <main class="container-fluid row d-flex justify-content-center m-0 p-0">
+
+
+        <aside id="city-display" class="col-lg-3 col-md-3 col-sm-12 bg-light border rounded mx-2">
+            <div class="d-flex align-items-center m-2">
+                <input class="form-control" type="search" placeholder="Enter Location" aria-label="Search"
+                    id="search-bar">
+                <button type="button" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <h4 class="m-2 text-center">Recent Searches</h4>
+            <ul class="list-group m-2" id="pastSearches">
+                <li class="list-group-item">San Francisco, CA</li>
+                <li class="list-group-item">Some other place</li>
+                <li class="list-group-item">Morbi leo risus</li>
+                <li class="list-group-item">Porta ac consectetur ac</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+
+            </ul>
+
+        </aside>
+
+
+
+
+
+
+        <section class="col-lg-7 col-md-7 col-sm-12 mx-auto d-flex flex-column m-3">
+
+
+
+            <div id="weather-panel" class="rounded text-center shadow-sm">
+
+                <h1 id="city" class="m-2">San Francisco</h1>
+                <h6 id="date">June 28th, 2020</h6>
+                <div id="forecast-img">
+                    <img src="https://img.icons8.com/plasticine/100/000000/windy-weather.png" />
+                </div>
+                <div id="forecast" class="d-flex justify-content-around align-items-end">
+                    <p>Temperature: <span id="temperature">70</span></p>
+                    <p>Humidity: <span id="humidity">80</span></p>
+                    <p>Windspeed: <span id="windspeed">90</span></p>
+                    <p class="p-1 bg-danger border rounded">UV Index: <span id="uv">10</span></p>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="text-center m-2">
+                <h2>5-Day Forecast:</h2>
+                <div id="fiveDayForecast">
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </section>
+
+    </main>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
