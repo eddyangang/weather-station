@@ -24,7 +24,7 @@ $(document).ready(function () {
 
 
             var iconcode = response.weather[0].icon;
-            var iconurl = `http://openweathermap.org/img/w/${iconcode}.png`;
+            var iconurl = `https://openweathermap.org/img/w/${iconcode}.png`;
             $('#forecast-img').attr("src", iconurl)
 
             var city = response.name;
@@ -73,7 +73,7 @@ $(document).ready(function () {
 
 
                 var weatherIcon = forecast[j].weather[0].icon;
-                var iconurl = `http://openweathermap.org/img/w/${weatherIcon}.png`;
+                var iconurl = `https://openweathermap.org/img/w/${weatherIcon}.png`;
 
                 var temp = Math.round(forecast[j].main.temp);
                 var tempMax = Math.ceil(forecast[j].main.temp_max);
@@ -127,7 +127,7 @@ $(document).ready(function () {
     }
 
     function displayUV(lat, lon) {
-        var uvURL = `http://api.openweathermap.org/data/2.5/uvi/forecast?appid=${APIKey}&lat=${lat}&lon=${lon}&cnt=${1}`
+        var uvURL = `https://api.openweathermap.org/data/2.5/uvi/forecast?appid=${APIKey}&lat=${lat}&lon=${lon}&cnt=${1}`
 
         $.ajax({
             url: uvURL,
