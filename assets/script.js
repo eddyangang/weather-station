@@ -9,7 +9,7 @@
 //uv indicator
 
 //weather icon indicator
-var pastSearches = ["London", "Berkeley"];
+var pastSearches = [];
 var fiveDays = ["dayOne", "dayTwo", "dayThree", "dayFour", "dayFive"];
 
 $(document).ready(function () {
@@ -64,32 +64,38 @@ $(document).ready(function () {
         }).then(function(response) {
             var forecast = response.list;
             console.log(response);
-            
+            var forecastArray = [8, 16, 24, 32, 39]
             
             for (let i = 0; i < fiveDays.length; i++) {
-
-                var longDate = forecast[i*8].dt;
+                var j = forecastArray[i]
+                var longDate = forecast[j].dt;
                 var date = new Date(longDate * 1000)
                 date = date.toDateString()
     
                 
-                var weatherIcon = forecast[i*8].weather[0].icon;
+                var weatherIcon = forecast[j].weather[0].icon;
                 var iconurl = `http://openweathermap.org/img/w/${weatherIcon}.png`;
                 
-                var temp = Math.round(forecast[i*8].main.temp);
+                var temp = Math.round(forecast[j].main.temp);
+                var tempMax = Math.ceil(forecast[j].main.temp_max);
+                var tempMin = Math.floor(forecast[j].main.temp_min);
+                var humidity = Math.round(forecast[j].main.humidity)
                 
-                
-
+                var description = forecast[j].weather[0].description;
                 var day = fiveDays[i];
-                var card = $(`<div class="card-flip-container"><div class="card-flip text-center" id=${day}><div class="frontcard bg-light border rounded"><h6 class="my-2"></h6><img/><p></p><p></p></div><div class="backcard bg-info border rounded">the back</div></div></div>`)
+                var card = $(`<div class="card-flip-container"><div class="card-flip text-center" id=${day}><div class="frontcard bg-light border rounded-lg"><h6 class="my-2"></h6><img/><p></p><p></p></div><div class="backcard bg-info border rounded"><h6></h6><p></p><p></p></div></div></div>`)
 
     
                 $("#fiveDayForecast").append(card)
 
                 $(`#${day}>.frontcard>h6`).text(`${date}`)
                 $(`#${day}>.frontcard>img`).attr("src", iconurl)
-                $(`#${day}>.frontcard>p`).text(`Temperature: ${temp}`)
-                $(`#${day}>.frontcard>p`).last().text(`Humidity: ${temp}`)
+                $(`#${day}>.frontcard>p`).text(`Temperature: ${temp}°F`)
+                $(`#${day}>.frontcard>p`).last().text(`Humidity: ${humidity}%`)
+
+                $(`#${day}>.backcard>h6`).text(`${description}`)
+                $(`#${day}>.backcard>p`).text(`Min Temperaure: ${tempMin}°F`)
+                $(`#${day}>.backcard>p`).last().text(`Max Temperature: ${tempMax}°F`)
             }
             
         })
@@ -97,10 +103,14 @@ $(document).ready(function () {
     }
 
     function initialize () {
+        $('#date').text(moment().format("dddd, MMMM Do YYYY"));
         var storage = JSON.parse(localStorage.getItem("pastSearches"));
 
         if (storage){
-            pastSearches = storage;
+            pastSearches = storage;    
+            displayWeather(pastSearches[pastSearches.length-1])
+        }else{
+            displayWeather("Berkeley")
         }
 
         cityDisplay();
