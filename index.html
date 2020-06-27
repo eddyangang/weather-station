@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
 
-
+    <link rel="stylesheet" href="style.css">
     <title>Weather Station</title>
 </head>
 
@@ -25,67 +25,42 @@
     <!-- List group -->
     <main class="container-fluid row d-flex justify-content-center m-0 p-0">
 
-
         <aside id="city-display" class="col-lg-3 col-md-3 col-sm-12 bg-light border rounded mx-2">
             <div class="d-flex align-items-center m-2">
-                <input class="form-control" type="search" placeholder="Enter Location" aria-label="Search"
+                <input class="form-control mx-2" type="search" placeholder="Enter Location" aria-label="Search"
                     id="search-bar">
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" id="searchBtn">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
-            <h4 class="m-2 text-center">Recent Searches</h4>
-            <ul class="list-group m-2" id="pastSearches">
-                <li class="list-group-item">San Francisco, CA</li>
-                <li class="list-group-item">Some other place</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-
+            <h4 class="text-center">Recent Searches</h4>
+            <ul class="list-group" id="pastSearches">
             </ul>
-
         </aside>
 
-
-
-
-
-
-        <section class="col-lg-7 col-md-7 col-sm-12 mx-auto d-flex flex-column m-3">
-
-
+        <section class="col-lg-7 col-md-7 col-sm-12 mx-auto d-flex flex-column my-3 mx-0">
 
             <div id="weather-panel" class="rounded text-center shadow-sm">
 
-                <h1 id="city" class="m-2">San Francisco</h1>
+                <h1 id="city" class="m-2"></h1>
                 <h6 id="date">June 28th, 2020</h6>
-                <div id="forecast-img">
-                    <img src="https://img.icons8.com/plasticine/100/000000/windy-weather.png" />
+
+                <img id="forecast-img" />
+
+                <div id="forecast" class="d-flex justify-content-around align-items-end ">
+                    <p>Temperature: <span id="temperature"></span></p>
+                    <p>Humidity: <span id="humidity"></span></p>
+                    <p>Windspeed: <span id="windspeed"></span></p>
+                    <p>UV Index: <span id="uv"></span></p>
                 </div>
-                <div id="forecast" class="d-flex justify-content-around align-items-end">
-                    <p>Temperature: <span id="temperature">70</span></p>
-                    <p>Humidity: <span id="humidity">80</span></p>
-                    <p>Windspeed: <span id="windspeed">90</span></p>
-                    <p class="p-1 bg-danger border rounded">UV Index: <span id="uv">10</span></p>
-                </div>
+
+
             </div>
 
-
-
-
-
-
-            <div class="text-center m-2">
-                <h2>5-Day Forecast:</h2>
-                <div id="fiveDayForecast">
-
-                </div>
+            <div>
+                <h2 class="text-center mt-2">5-Day Forecast:</h2>
+                <div id="fiveDayForecast" class="row col-lg-12 col-md-12 col-sm-4 col-xs-4"></div>
             </div>
-
-
-
-
-
 
         </section>
 
@@ -101,6 +76,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 
 </html>
