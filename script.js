@@ -56,14 +56,13 @@ $(document).ready(function () {
     function displayForecast(city) {
         $("#fiveDayForecast").empty()
 
-        var queryURL = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`;
+        var queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`;
 
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
             var forecast = response.list;
-            console.log(response);
             var forecastArray = [8, 16, 24, 32, 39]
 
             for (let i = 0; i < fiveDays.length; i++) {
