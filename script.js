@@ -150,7 +150,7 @@ $(document).ready(function () {
             displayWeather(lastSearch)
         } else {
             // display the weather for berkeley
-            displayWeather("Miami")
+            displayWeather("Berkeley")
         }
 
     }
@@ -163,6 +163,7 @@ $(document).ready(function () {
             var li = $('<li>')
             li.text(pastSearches[i])
             li.addClass("list-group-item")
+            li.append(`<button type="button" class="close" aria-label="Close"><span id =${pastSearches[i]} aria-hidden="true">&times;</span></button>`)
             $('ul').append(li)
         }
     }
@@ -209,8 +210,27 @@ $(document).ready(function () {
 
     $(document).on("click", "li", function () {
         var place = ($(this).text());
+        place = place.substring(0, place.length - 1)
         displayWeather(place)
 
+    })
+
+    $(document).on("click", ".close", function (e) {
+        e.stopPropagation();
+        city = e.target;
+
+        pastSearches = pastSearches.filter(a => a !== city.id)
+        // save the searches into localstorage
+        localStorage.setItem("WeatherSearches", JSON.stringify({
+            pastSearches: pastSearches,
+            lastSearch: lastSearch
+        }))
+
+        var listItem = city.parentNode.parentNode;
+        var ul = listItem.parentNode;
+
+        
+        ul.removeChild(listItem)
     })
 
     // Initialize page
