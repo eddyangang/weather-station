@@ -89,7 +89,6 @@ $(document).ready(function () {
 
             // used to get the forecast for subsequent days, except today
             var forecastIndex = [8, 16, 24, 32, 39]
-            console.log(forecast);
             
             // create cards for 5-day forecast and display the content onto the card.
             for (let i = 0; i < fiveDays.length; i++) {
@@ -226,7 +225,7 @@ $(document).ready(function () {
         // Prevents event listener for list items from activating
         e.stopPropagation();
 
-        // get close button 
+        // get seleced close button 
         var closeBtn = e.target;
 
         // retrieve id of close button
