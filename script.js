@@ -24,13 +24,14 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-
             // get icon code for weather
             var iconcode = response.weather[0].icon;
-            var iconurl = `https://openweathermap.org/img/w/${iconcode}.png`;
+            // // this is for OWM default icons
+            // var iconurl = `https://openweathermap.org/img/w/${iconcode}.png`;
 
-            // set icon code for weather
-            $('#forecast-img').attr("src", iconurl)
+            // Using custom icons
+            var iconurl = `assets/img/icons/${iconcode}.png`
+            $('#forecast-img').html(`<img src="${iconurl}"/>`)
 
             // parse the data from response
             var city = response.name;
@@ -88,7 +89,8 @@ $(document).ready(function () {
 
             // used to get the forecast for subsequent days, except today
             var forecastIndex = [8, 16, 24, 32, 39]
-
+            console.log(forecast);
+            
             // create cards for 5-day forecast and display the content onto the card.
             for (let i = 0; i < fiveDays.length; i++) {
                 // index for forecast
@@ -102,18 +104,19 @@ $(document).ready(function () {
 
                 // get weather icon for each day in forecast
                 var weatherIcon = forecast[j].weather[0].icon;
-                var iconurl = `https://openweathermap.org/img/w/${weatherIcon}.png`;
-
+                // var iconurl = `https://openweathermap.org/img/w/${weatherIcon}.png`;
+                var iconurl = `assets/img/icons/${weatherIcon}.png`
                 // set variables to main forcast data
                 var temp = Math.round(forecast[j].main.temp);
                 var tempMax = Math.ceil(forecast[j].main.temp_max);
                 var tempMin = Math.floor(forecast[j].main.temp_min);
                 var humidity = Math.round(forecast[j].main.humidity)
                 var description = forecast[j].weather[0].description;
+                var feelsLike = Math.round(forecast[j].main.feels_like)
                 // for each day in 5-day forecast
                 var day = fiveDays[i];
                 // create a card and give the card an id of the day
-                var card = $(`<div class="card-flip-container"><div class="card-flip text-center" id=${day}><div class="frontcard bg-light border rounded-lg"><h6 class="my-2"></h6><img/><p></p><p></p></div><div class="backcard bg-info border rounded"><h6></h6><p></p><p></p></div></div></div>`)
+                var card = $(`<div class="card-flip-container"><div class="card-flip text-center" id=${day}><div class="frontcard bg-light border rounded-lg"><h6 class="my-2"></h6><img/><p></p><p></p></div><div class="backcard bg-info border rounded"><h6></h6><p></p><p></p><p></p></div></div></div>`)
 
                 // append card to html
                 $("#fiveDayForecast").append(card)
@@ -126,6 +129,7 @@ $(document).ready(function () {
 
                 $(`#${day}>.backcard>h6`).text(`${description}`)
                 $(`#${day}>.backcard>p`).text(`Min Temperaure: ${tempMin}°F`)
+                $(`#${day}>.backcard>p`).first().text(`Feels like: ${feelsLike}°F`)
                 $(`#${day}>.backcard>p`).last().text(`Max Temperature: ${tempMax}°F`)
             }
 
@@ -217,19 +221,22 @@ $(document).ready(function () {
 
     $(document).on("click", ".close", function (e) {
         e.stopPropagation();
-        city = e.target;
-
-        pastSearches = pastSearches.filter(a => a !== city.id)
+        var city = e.target;
+        var id = city.id
+        pastSearches = pastSearches.filter(a => a !== id)
+        lastSearch = pastSearches[0];
         // save the searches into localstorage
         localStorage.setItem("WeatherSearches", JSON.stringify({
             pastSearches: pastSearches,
             lastSearch: lastSearch
         }))
 
+        console.log(pastSearches);
+        
         var listItem = city.parentNode.parentNode;
         var ul = listItem.parentNode;
 
-        
+
         ul.removeChild(listItem)
     })
 
