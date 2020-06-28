@@ -104,7 +104,10 @@ $(document).ready(function () {
 
                 // get weather icon for each day in forecast
                 var weatherIcon = forecast[j].weather[0].icon;
+
+                // // Use this for OWM default icons
                 // var iconurl = `https://openweathermap.org/img/w/${weatherIcon}.png`;
+                // Using custom icons
                 var iconurl = `assets/img/icons/${weatherIcon}.png`
                 // set variables to main forcast data
                 var temp = Math.round(forecast[j].main.temp);
@@ -121,12 +124,12 @@ $(document).ready(function () {
                 // append card to html
                 $("#fiveDayForecast").append(card)
 
-                // display the data onto the card
+                // display the data onto the front card
                 $(`#${day}>.frontcard>h6`).text(`${date}`)
                 $(`#${day}>.frontcard>img`).attr("src", iconurl)
                 $(`#${day}>.frontcard>p`).text(`Temperature: ${temp}°F`)
                 $(`#${day}>.frontcard>p`).last().text(`Humidity: ${humidity}%`)
-
+                // display the data onto the back card
                 $(`#${day}>.backcard>h6`).text(`${description}`)
                 $(`#${day}>.backcard>p`).text(`Min Temperaure: ${tempMin}°F`)
                 $(`#${day}>.backcard>p`).first().text(`Feels like: ${feelsLike}°F`)
@@ -192,7 +195,7 @@ $(document).ready(function () {
             // add classes for the UV index
             $('#uv').addClass("p-1 border-0 rounded-lg")
 
-            // Adjust UV highlight based on condition
+            // Adjust UV highlight based on severity.
             if (uv > 8) {
                 $('#uv').addClass("bg-danger")
             } else if (uv > 5) {
@@ -204,39 +207,48 @@ $(document).ready(function () {
 
     }
 
-
+    // Event listener for search button
     $('#searchBtn').on("click", function () {
         var place = $('#search-bar').val()
         $('#search-bar').val("")
         displayWeather(place)
-
     });
 
+    // Event listener for list item clicks
     $(document).on("click", "li", function () {
         var place = ($(this).text());
         place = place.substring(0, place.length - 1)
         displayWeather(place)
-
     })
 
+    // Event listener for close button
     $(document).on("click", ".close", function (e) {
+        // Prevents event listener for list items from activating
         e.stopPropagation();
-        var city = e.target;
-        var id = city.id
+
+        // get close button 
+        var closeBtn = e.target;
+
+        // retrieve id of close button
+        var id = closeBtn.id
+
+        // Remove the city from array list.
         pastSearches = pastSearches.filter(a => a !== id)
+
+        // set last search as first element in array to prevent deleted city for reappearing when page is refreshed.
         lastSearch = pastSearches[0];
+
         // save the searches into localstorage
         localStorage.setItem("WeatherSearches", JSON.stringify({
             pastSearches: pastSearches,
             lastSearch: lastSearch
         }))
-
-        console.log(pastSearches);
-        
-        var listItem = city.parentNode.parentNode;
+        // get the list item for which the close btn was selcted for
+        var listItem = closeBtn.parentNode.parentNode;
+        // get parent of list items
         var ul = listItem.parentNode;
 
-
+        // remove selcted list item from screen
         ul.removeChild(listItem)
     })
 
