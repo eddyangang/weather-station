@@ -89,7 +89,7 @@ $(document).ready(function () {
 
             // used to get the forecast for subsequent days, except today
             var forecastIndex = [8, 16, 24, 32, 39]
-            
+
             // create cards for 5-day forecast and display the content onto the card.
             for (let i = 0; i < fiveDays.length; i++) {
                 // index for forecast
@@ -118,7 +118,23 @@ $(document).ready(function () {
                 // for each day in 5-day forecast
                 var day = fiveDays[i];
                 // create a card and give the card an id of the day
-                var card = $(`<div class="card-flip-container"><div class="card-flip text-center" id=${day}><div class="frontcard bg-light border rounded-lg"><h6 class="my-2"></h6><img/><p></p><p></p></div><div class="backcard bg-info border rounded"><h6></h6><p></p><p></p><p></p></div></div></div>`)
+                var card = $(
+                `<div class="card-flip-container">
+                    <div class="card-flip text-center" id=${day}>
+                        <div class="frontcard bg-light border rounded-lg">
+                            <h6 class="my-2"></h6>
+                            <img/>
+                            <p></p>
+                            <p></p>
+                        </div>
+                        <div class="backcard bg-info border rounded">
+                             <h6></h6>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>`)
 
                 // append card to html
                 $("#fiveDayForecast").append(card)
